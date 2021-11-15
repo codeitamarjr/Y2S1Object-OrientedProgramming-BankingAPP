@@ -12,7 +12,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             } else
             {
                 Console.WriteLine("Welcome to the Customer System");
-                models.Customer.entrySystem();
+                models.Customer.System();
             }
 
           

@@ -19,6 +19,13 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             //Parse the String to a Double and return it
             return Double.Parse(savingsArray[lastItem]) ;
         }
-
+        public static void createSavings(String accountNumber)
+        {
+            StreamWriter sw = new StreamWriter(accountNumber + "-savings.txt", true, Encoding.ASCII);
+            String today = DateTime.Now.ToString("dd/MM/yyyy");
+            sw.WriteLine(today + "\tStart\t" + 0 + "\t" + 0);
+            Console.WriteLine("The Savings Account has been created with success!");
+            sw.Close();
+        }
     }
 }

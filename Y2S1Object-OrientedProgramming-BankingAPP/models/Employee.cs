@@ -63,29 +63,12 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                         //If it's not on the customer file, the StreamWriter will create files savings, current and add to the customers.txt
                         {
                             //Open the file
-                            StreamWriter sw = new StreamWriter(accountNumber + "-savings.txt", true, Encoding.ASCII);
-                            String today = DateTime.Now.ToString("dd/MM/yyyy");
-                            sw.WriteLine(today + "\tStart\t" + 0 + "\t" + 0);
-                            Console.WriteLine("The Savings Account has been created with success!");
-
-                            StreamWriter sw2 = new StreamWriter(accountNumber + "-current.txt", true, Encoding.ASCII);
-                            sw2.WriteLine(today + "\tStart\t" + 0 + "\t" + 0);
-                            Console.WriteLine("The Current Account has been created with success!");
-
-
-                            StreamWriter sw3 = new StreamWriter("customers.txt");
-                            sw3.WriteLine(accountNumber);
-                            Console.WriteLine("Account added to the customers database");
-
-                            Console.WriteLine("File " + accountNumber + "-savings.txt" + " and " + accountNumber + "-current.txt" + " were creacted with success!");
-                            //Close the file
-                            sw.Close();
-                            sw2.Close();
-                            sw3.Close();
+                            Savings.createSavings(accountNumber);
+                            Current.createCurrent(accountNumber);
+                            Customer.createCustomer(accountNumber);
                             System();
                         }
                     }
-                    sr.Close();
                 }
                 
             }
@@ -95,19 +78,10 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 // Let the user know what went wrong, for example if it's the first access to the system
                 Console.WriteLine("The file could not be read/found:");
                 Console.WriteLine(e.Message);
-                StreamWriter sw = new StreamWriter(accountNumber + "-savings.txt", true, Encoding.ASCII);
-                String today = DateTime.Now.ToString("dd/MM/yyyy");
-                sw.WriteLine(today + "\tStart\t" + 0 + "\t" + 0);
-                StreamWriter sw2 = new StreamWriter(accountNumber + "-current.txt", true, Encoding.ASCII);
-                sw2.WriteLine(today + "\tStart\t" + 0 + "\t" + 0);
-                StreamWriter sw3 = new StreamWriter("customers.txt");
-                sw3.WriteLine(accountNumber);
-                Console.WriteLine("Account added to the customers database");
-                Console.WriteLine("File " + accountNumber + "-savings.txt" + " and " + accountNumber + "-current.txt" + " were creacted with success!");
-                //Close the file
-                sw.Close();
-                sw2.Close();
-                sw3.Close();
+
+                Savings.createSavings(accountNumber);
+                Current.createCurrent(accountNumber);
+                Customer.createCustomer(accountNumber);
                 System();
             }
         }
