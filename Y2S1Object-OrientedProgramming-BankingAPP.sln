@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Y2S1Object-OrientedProgramming-BankingAPP", "Y2S1Object-OrientedProgramming-BankingAPP\Y2S1Object-OrientedProgramming-BankingAPP.csproj", "{C95D8E93-E171-4A46-B67C-C15C361BA110}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C95D8E93-E171-4A46-B67C-C15C361BA110}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{C95D8E93-E171-4A46-B67C-C15C361BA110}.Debug|anycpu.Build.0 = Debug|anycpu
+		{C95D8E93-E171-4A46-B67C-C15C361BA110}.Release|anycpu.ActiveCfg = Release|anycpu
+		{C95D8E93-E171-4A46-B67C-C15C361BA110}.Release|anycpu.Build.0 = Release|anycpu
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E4233CB-0FE2-48E7-8D1E-BEE55D532937}
+	EndGlobalSection
+EndGlobal
