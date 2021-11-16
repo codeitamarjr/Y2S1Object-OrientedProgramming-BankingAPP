@@ -5,11 +5,12 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP
 {
     class MainClass
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            Console.WriteLine("Welcome to Banking TriploXXX System");
+            Console.WriteLine("***********************************\nWelcome to Banking TriploXXX System" +
+                "\n***********************************");
 
-            Console.WriteLine("Are you a: \n1-Employee or an \n2-Customer? \nType your option:");
+            Console.WriteLine("Identifie yourself\n(1)Employer\n(2)Customer\nType your option:");
 
             int userOption = Convert.ToInt32(Console.ReadLine());
 

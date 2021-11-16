@@ -5,9 +5,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
 {
     public class Current
     {
-        public Current()
-        {
-        }
+        
         public static double getCurrent(String accountNumber)
         {
             StreamReader sr = new StreamReader(accountNumber + "-current.txt");
@@ -26,5 +24,22 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             Console.WriteLine("The Current Account has been created with success!");
             sw.Close();
         }
+        public static void history(String accountNumber)
+        {
+            Console.WriteLine("Current History");
+            Console.WriteLine("Date\t\tDesc\tAmount\tBalance");
+            using (StreamReader sr = new StreamReader(accountNumber + "-current.txt"))
+            {
+                string line;
+                // Read and display lines from the file until 
+                // the end of the file is reached. 
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+        }
+
+     
     }
 }
