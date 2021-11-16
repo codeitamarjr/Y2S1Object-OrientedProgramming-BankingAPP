@@ -1,4 +1,5 @@
-﻿using System;
+﻿//23952
+using System;
 using System.IO;
 namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
 {
@@ -31,7 +32,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 String accountNumber = Console.ReadLine();
                 Console.WriteLine("What is the ammount you want to lodge?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
-                Lodge.Operation(accountNumber, ammount, "Lodge", "current");
+                Lodge.Operation(accountNumber, ammount, "Lodgement", "current");
                 System();
             }
             if (userOption == 4)

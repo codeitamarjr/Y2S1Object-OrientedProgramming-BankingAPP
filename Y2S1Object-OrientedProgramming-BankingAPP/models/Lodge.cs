@@ -1,4 +1,5 @@
-﻿using System;
+﻿//23952
+using System;
 using System.IO;
 namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
 {
@@ -11,7 +12,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             double balanceAccount = Double.Parse(accounttArray[accounttArray.Length - 1]);
             double newBalanceSavingsAccount = balanceAccount + ammount;
             Console.WriteLine("The Balance of " + sourceAccount + " Account is " + balanceAccount);
-
             //read savings and create a new savings temp;
             using (var sreader = new StreamReader(accountNumber + "-" + sourceAccount + ".txt"))
             using (var swriter = new StreamWriter(accountNumber + "-" + sourceAccount + "-temp.txt"))
@@ -28,7 +28,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             {
                 sw.WriteLine(today + "\t" + operation + "\t" + ammount + "\t" + newBalanceSavingsAccount);
             }
-
             //Delete the old file and rename removing temp from the file
             File.Delete(accountNumber + "-" + sourceAccount + ".txt");
             File.Move(accountNumber + "-" + sourceAccount + "-temp.txt", accountNumber + "-" + sourceAccount + ".txt");
