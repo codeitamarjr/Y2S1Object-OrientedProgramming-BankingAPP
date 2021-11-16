@@ -16,9 +16,8 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 Console.WriteLine("Insuficient Balance: "+balanceAccount);
             } else
             {
-                string accountUpperCase = char.ToUpper(sourceAccount[0]) + (sourceAccount.Substring(1));
-
-
+             //Get the firt letter of the account Uper Case
+             string accountUpperCase = char.ToUpper(sourceAccount[0]) + (sourceAccount.Substring(1));
 
             double newBalanceSavingsAccount = balanceAccount - ammount;
             Console.WriteLine("The Balance of " + accountUpperCase + " Account is " + balanceAccount);
@@ -41,7 +40,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             //Delete the old file and rename removing temp from the file
             File.Delete(accountNumber + "-" + sourceAccount + ".txt");
             File.Move(accountNumber + "-" + sourceAccount + "-temp.txt", accountNumber + "-" + sourceAccount + ".txt");
-            Console.WriteLine("The ammount " + ammount + " was removed from the " + accountUpperCase + " Account with success!" +
+            Console.WriteLine("The ammount " + ammount + " was withdraw from the " + accountUpperCase + " Account with success!" +
                 "\nThe new " + accountUpperCase + " Account Balance is " + newBalanceSavingsAccount);
             }
         }

@@ -131,31 +131,31 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 int userOption = Convert.ToInt32(Console.ReadLine());
                 if (userOption == 1)
                 {
-                    //read customer and create a new customers temp
+                    //read customer and create a new customers-temp
                     using (var sreader = new StreamReader("customers.txt"))
                     using (var swriter = new StreamWriter("customers-temp.txt"))
-                    //copy lines from customers to customers-temp
+                    //copy lines from customers to string lines
                     {
+                       
                         string lines;
-                        Console.WriteLine(sreader.ReadLine());
-
                         while ((lines = sreader.ReadLine()) != null)
                         {
-                            //If the line is diferent of accountNumber copy it, if it's the same skip it
-                            if (lines != accountNumber)
+                            //If the line is does not contain the account number
+                            //copy the line to the customers-temp.txt
+                            if (!lines.Contains(accountNumber))
                             {
                                 swriter.WriteLine(lines);
                             }
                         }
                     }
                     //After all data was copy from customers to customers-temp(Skiping the
-                    //account to delete), delete the old file
-                    //and rename removing temp from the file
+                    //account to delete), delete the old file customers file and
+                    //rename removing temp from the new file(Also delete savings and current of this accountNumber)
                     File.Delete("customers.txt");
                     File.Delete(accountNumber + "-savings.txt");
                     File.Delete(accountNumber + "-current.txt");
                     File.Move("customers-temp.txt", "customers.txt");
-                    Console.WriteLine("The account number above was deleted from the Customer DB, savings account and current account also deleted.");
+                    Console.WriteLine("The account number "+ accountNumber + " was deleted from the Customer DB, savings account and current account also deleted.");
                 }
                 if (userOption == 2)
                     Console.WriteLine("Operation cancelled.");

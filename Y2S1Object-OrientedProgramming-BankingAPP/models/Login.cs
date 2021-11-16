@@ -1,6 +1,5 @@
 ﻿//23952
 using System;
-using System.IO;
 namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
 {
     public class Login
