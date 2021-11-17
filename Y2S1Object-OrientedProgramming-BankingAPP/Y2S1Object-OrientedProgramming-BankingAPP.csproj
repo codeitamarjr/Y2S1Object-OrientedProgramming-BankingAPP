@@ -37,8 +37,7 @@
     <Compile Include="models\Employee.cs" />
     <Compile Include="models\Savings.cs" />
     <Compile Include="models\Current.cs" />
-    <Compile Include="models\Lodge.cs" />
-    <Compile Include="models\Withdraw.cs" />
+    <Compile Include="models\Operations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />

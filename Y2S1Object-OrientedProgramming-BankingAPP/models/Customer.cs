@@ -18,15 +18,15 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             int userOption = Convert.ToInt32(Console.ReadLine());
             if (userOption == 1)
             {
-                Current.history(accountNumber);
-                Savings.history(accountNumber);
+                Operations.statement(accountNumber, "current");
+                Operations.statement(accountNumber, "savings");
                 System(accountNumber);
             }
             if (userOption == 2)
             {
                 Console.WriteLine("What is the ammount you want to lodge?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
-                Lodge.Operation(accountNumber, ammount, "Lodgement", "current");
+                Operations.Operation(accountNumber, ammount, "Lodgement", "current");
                 System(accountNumber);
             }
             if (userOption == 3)
@@ -38,7 +38,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                     Console.WriteLine("Insuficient Account Balance");
                 } else
                 {
-                    Withdraw.Operation(accountNumber, ammount, "Withdraw", "current");
+                    Operations.Operation(accountNumber, -ammount, "Withdraw", "current");
                 }
                 System(accountNumber);
             }
@@ -52,8 +52,11 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 }
                 else
                 {
-                    Withdraw.Operation(accountNumber, ammount, "Transfer", "current");
-                    Lodge.Operation(accountNumber, ammount, "Transfer", "savings");
+                    Operations.Operation(accountNumber, -ammount, "Transfer", "current");
+                    Operations.Operation(accountNumber, ammount, "Transfer", "savings");
+
+                    //Withdraw.Operation(accountNumber, ammount, "Transfer", "current");
+                    //Lodge.Operation(accountNumber, ammount, "Transfer", "savings");
                 }
                 System(accountNumber);
             }
@@ -67,9 +70,10 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 }
                 else
                 {
-
-                    Withdraw.Operation(accountNumber, ammount, "Transf:C>S", "savings");
-                    Lodge.Operation(accountNumber, ammount, "Transf:C>S", "current");
+                    Operations.Operation(accountNumber, -ammount, "Transfer", "savings");
+                    Operations.Operation(accountNumber, ammount, "Transfer", "current");
+                    //Withdraw.Operation(accountNumber, ammount, "Transfer", "savings");
+                    //Lodge.Operation(accountNumber, ammount, "Transfer", "current");
                 }
                 System(accountNumber);
 
@@ -79,10 +83,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             {
                 MainClass.Main();
             }
-            //1.To login, a customer must enter their name, account code AND a pin number for their account
-            //2.A customer can retrieve the transaction history for their specified account.
-            //3.They can add and subtract money to either their savings account or current account.
-            //4.They cannot have negative balances
         }
         public static void createCustomer(String accountNumber, String firstName, String lastName, String email)
         {
@@ -183,6 +183,8 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             Console.WriteLine("Account\t\tName\tCurrent\tSavings");
             for (int i = 0; i < customersArray.Length; i++)
             {
+                //if the array contains "-" means is an accountNumber
+                //for each account number it will print the balance of savings and current
                 if (customersArray[i].Contains("-"))
                 {
                     Console.WriteLine(customersArray[i]+"\t"+ customersArray[i+1] +
@@ -209,12 +211,12 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                         {
                             if ( password == PIN)
                             {
-                            Console.WriteLine("Accces guaranted");
+                            Console.WriteLine("Accces guaranted for "+firstName);
                                 System(accountNumber);
-                            }
-                        }
-                    }
-                } 
+                            } Console.WriteLine("Wrong pin");
+                        } Console.WriteLine("Wrong Account Number");
+                    } 
+                }  
             }
         }
     }

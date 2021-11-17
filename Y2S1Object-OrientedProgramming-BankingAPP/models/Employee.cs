@@ -12,8 +12,9 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 "\n(2)Delete customers" +
                 "\n(3)Lodge Current Account" +
                 "\n(4)Withdraw Current Account" +
-                "\n(5)List Customers DATA" +
+                "\n(5)List Customers Personal DATA" +
                 "\n(6)List Customers Balances" +
+                "\n(7)Account Statements" +
                 "\n(0)Go back to the Main Menu");
             int userOption = Convert.ToInt32(Console.ReadLine());
             if (userOption == 1)
@@ -24,7 +25,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             {
                 Delete();
             }
-            //4.You can create transactions(lodge, deposit) for each customer. You should be able to add and withdraw for a specified account.
             if (userOption == 3)
             {
                 Console.WriteLine("==================\nWelcome to the Lodge Panel");
@@ -32,7 +32,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 String accountNumber = Console.ReadLine();
                 Console.WriteLine("What is the ammount you want to lodge?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
-                Lodge.Operation(accountNumber, ammount, "Lodgement", "current");
+                Operations.Operation(accountNumber,ammount,"Lodgement","current");
                 System();
             }
             if (userOption == 4)
@@ -42,7 +42,13 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 String accountNumber = Console.ReadLine();
                 Console.WriteLine("What is the ammount you want to withdraw?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
-                Withdraw.Operation(accountNumber, ammount, "Withdraw", "current");
+                if ( ammount > Current.getCurrent(accountNumber))
+                {
+                    Console.WriteLine("Insuficiente Account Balance");
+                } else
+                {
+                    Operations.Operation(accountNumber, -ammount, "Withdraw", "current");
+                }
                 System();
             }
             if (userOption == 5)
@@ -57,6 +63,19 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 Customer.listCustomersBalances();
                 System();
             }
+            if (userOption == 6)
+            {
+                Console.WriteLine("==================\nWelcome to the Bank Statements");
+                Console.WriteLine("What is the account number you want to see?");
+                String accountNumber = Console.ReadLine();
+                Console.WriteLine("Choose an option:" +
+                    "\n(1)Current Account" +
+                    "\n(2)Savings Account");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 1) Operations.statement(accountNumber, "current");
+                if (option == 2) Operations.statement(accountNumber, "savings");
+                System();
+            }
 
             if (userOption == 0)
             {
@@ -66,8 +85,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
         }
 
         private static void Create()
-        //1.As a bank employee you can create and delete customers.
-        //2.Each new customer gets a savings account and a current account. 
         {
             //5.To create a customer account you need first name, last name and email.
             Console.WriteLine("==================\nWelcome to the Create Panel");
@@ -83,6 +100,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             int numberLastName = char.ToUpper(lastName[0]) - 64;
 
 
+            //The formula to create the account number:
             String accountNumber = firstName[0] + "" + lastName[0] + "-" + leghtName + "-" + numberFirstName + "-" + numberLastName;
             Console.WriteLine("The bank account of " + firstName + " " + lastName + " is " + accountNumber);
             CreateFiles(accountNumber,firstName,lastName,email);
@@ -108,7 +126,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
         }
 
         private static void Delete()
-        //3.You can only delete customers who have zero balances. 
         {
             Console.WriteLine("==================\nWelcome to the Delete Panel");
             Console.WriteLine("What is the account code that you wish to delete?");
@@ -116,7 +133,5 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             Customer.deleteCustomer(accountNumber);
             System();
         }
-        //6.You should be able to show a complete list of customers including their balances in savings and current account.
-        //7.There should be a menu item allowing you to list customers, their account numbers.
     }
 }

@@ -24,22 +24,5 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             //Parse the String to a Double and return it
             return Double.Parse(currentArray[lastItem]);
         }
-        public static void history(String accountNumber)
-        {
-            Console.WriteLine("Current History");
-            Console.WriteLine("Date\t\tDesc\tAmount\tBalance");
-            using (StreamReader sr = new StreamReader(accountNumber + "-current.txt"))
-            {
-                string line;
-                // Read and display lines from the file until 
-                // the end of the file is reached. 
-                while ((line = sr.ReadLine()) != null)
-                {
-                    Console.WriteLine(line);
-                }
-            }
-        }
-
-     
     }
 }

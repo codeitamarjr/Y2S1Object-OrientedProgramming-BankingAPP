@@ -10,7 +10,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
         {
             StreamWriter sw = new StreamWriter(accountNumber + "-savings.txt", true, Encoding.ASCII);
             String today = DateTime.Now.ToString("dd/MM/yyyy");
-            sw.WriteLine(today + "\tOpening Acc\t" + 0 + "\t" + 0);
+            sw.WriteLine(today + "\tOpening\t" + 0 + "\t" + 0);
             Console.WriteLine("The Savings Account has been created with success!");
             sw.Close();
         }
@@ -24,21 +24,5 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             //Parse the String to a Double and return it
             return Double.Parse(savingsArray[lastItem]) ;
         }
-        public static void history(String accountNumber)
-        {
-            Console.WriteLine("Savings History");
-            Console.WriteLine("Date\t\tDesc\tAmount\tBalance");
-            using (StreamReader sr = new StreamReader(accountNumber + "-savings.txt"))
-            {
-                string line;
-                // Read and display lines from the file until 
-                // the end of the file is reached. 
-                while ((line = sr.ReadLine()) != null)
-                {
-                    Console.WriteLine(line);
-                }
-            }
-        }
-
     }
 }
