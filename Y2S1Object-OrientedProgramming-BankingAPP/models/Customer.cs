@@ -8,7 +8,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
         public static void System(String accountNumber)
         {
             Console.WriteLine("As a Customer you can:" +
-                "\n(1)Retrieve the Transaction History" +
+                "\n(1)Bank Statments" +
                 "\n(2)Lodge" +
                 "\n(3)Withdraw" +
                 "\n(4)Transfer from Current to Savings" +
