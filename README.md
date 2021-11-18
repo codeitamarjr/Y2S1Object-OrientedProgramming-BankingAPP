@@ -1,43 +1,55 @@
 ### Features
-This is a project of my Bsc in Computing from Object Oriented Programmin
-It's a Banking System Program on C# and the Features are:
-- From the employee side, create, delete and update customers( their current and savings account);
-- From the customer side, it's possible to login with their name, account and pin, see statements, lodge, withdraw and transfer beetween accounts.;
+This is a project of my Bsc in Computing from Object Oriented Programming
+It is a Banking System Program on C# and the Features are:
+- A Welcome login page for employees and customers;
+- From the employee side they can: Create, delete and update customers accouns( Lodge, Withdraw and Trasnfer beetwen accounts);
+- From the customer side they can: It's possible to login with their name, account and pin, see statements, lodge, withdraw and transfer beetween accounts;
 
 # Banking System
 [TOCM]
 
 [TOC]
 
-# How The System Works
-At the first screen the user needs to infome if he's a employee of the bank or a user
+# How The System Works: Welcome Screen
+At the first screen the user needs to infome if he's a employee of the bank or a customer.
 ## Login as Employee
-As employee the user will be asked to input a password(A1234), after the successul password the System's will show the options for the employee:
+As employee the user will be asked to input a password(A1234), after the successul password the System's will shows the options for the employee:
 - Create a New Customer;
 It'll be necessary provide the First Name, Last Name and Email Address, the program will generate an account number based on the customer full name:
-xx-nn-yy-zz where xx is the initials of the customer, nn is the length of the total name (first name and last name), yy is the alphabetical position of the first initial and zz is the alphabetical position of the second initial (see table below same as CHAR starting from 1) - together they make up the pin number.
+The account number will have the formate xx-nn-yy-zz, where xx is the initials of the customer, nn is the length of the total name (first name and last name), yy is the alphabetical position of the first initial and zz is the alphabetical position of the second initial (see table below same as CHAR starting from 1), together yy-zz they make up the pin number.
+
 A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z
+
 1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22	23	24	25	26
-Also, the program will add these data into the customers.txt file and, the program will create two text files, one for the current account and another for savings account following the rule xx-nn-yy-zz-current.txt and xx-nn-yy-zz-savings.txt.
-Both text files will store the data on the format:
-        Date				Operation	Ammount	Balance
+
+Also, the program will add the customers data into the customers.txt file and, the program will create two txt files, one for the current account and another one for savings account following the rule xx-nn-yy-zz-current.txt and xx-nn-yy-zz-savings.txt.
+
+Both text files will log each moviment of the account on the format:
+
+        Date	Operation	Ammount	        Balance
+        
         23-01-2017	Withdrawal	25.67		100.17
 
 - Delete a Customer;
+
 The option to delete a customer will ask for his account number xx-nn-yy-zz( format explained above), after check if current and savings is zero the program will delete the entry of this account number from the customers.txt file and delete the current.txt and savings.txt files of this account.
 If the balance is above 0 the systems will shows the balance with a error, trhowing the user to the employee menu.
 
 - Lodge Current Account;
+
 The employee will be able to lodge a current account, the program will ask for the account number and ammount to lodge in.
 The program will add the entry to the current.txt account numbers file and update the balance on this file.
 
 - Withdraw Current Account;
+
 The employee will be able to withdraw for a current account, the program will ask for the account number and ammount to withdraw, if the ammount is above the balance of this account an error will appear showing the balance of this customer current account.
 
 - List Customers Data;
+
 The employee will be able to list all the customer with their data( Full name and email)
 
 - List Customers Balance;
+
 The employee also will be able to see all the accounts and their balances for savings and current account.
 
 ## Login as User
