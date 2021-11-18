@@ -28,7 +28,11 @@ Both text files will log each moviment of the account on the format:
 
         Date	Operation	Ammount	        Balance
         
-        23-01-2017	Withdrawal	25.67		100.17
+        23-01-2017	Starting	0		0
+        24-01-2017	Lodgement	100		100
+        24-02-2017	Withdraw	-50		50
+
+
 
 - Delete a Customer;
 
