@@ -1,4 +1,4 @@
-﻿//23952
+﻿//23952 Itamar Junior
 using System;
 using System.IO;
 namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
@@ -7,30 +7,39 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
     {
         public static void System(String accountNumber)
         {
-            Console.WriteLine("As a Customer you can:" +
+            Vanilla.top();
+            Console.WriteLine("Customer Access Menu for " +accountNumber+
                 "\n(1)Bank Statments" +
                 "\n(2)Lodge" +
                 "\n(3)Withdraw" +
                 "\n(4)Transfer from Current to Savings" +
                 "\n(5)Transfer from Savings to Current" +
-                "\n(0)Exit and go back to the Main Menu");
+                "\n(0)Exit and go back to the Main Menu" +
+                "   Type your option:");
 
             int userOption = Convert.ToInt32(Console.ReadLine());
             if (userOption == 1)
             {
+                Vanilla.top();
                 Operations.statement(accountNumber, "current");
                 Operations.statement(accountNumber, "savings");
-                System(accountNumber);
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if ( option == 0) System(accountNumber);
             }
             if (userOption == 2)
             {
+                Vanilla.top();
                 Console.WriteLine("What is the ammount you want to lodge?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
                 Operations.Operation(accountNumber, ammount, "Lodgement", "current");
-                System(accountNumber);
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System(accountNumber);
             }
             if (userOption == 3)
             {
+                Vanilla.top();
                 Console.WriteLine("What is the ammount you want to withdraw?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
                 if (ammount > Current.getCurrent(accountNumber))
@@ -40,10 +49,13 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 {
                     Operations.Operation(accountNumber, -ammount, "Withdraw", "current");
                 }
-                System(accountNumber);
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System(accountNumber);
             }
             if (userOption == 4)
             {
+                Vanilla.top();
                 Console.WriteLine("What is the ammount you want to Transfer from your Current Account into your Savings Account?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
                 if (ammount > Current.getCurrent(accountNumber))
@@ -58,10 +70,13 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                     //Withdraw.Operation(accountNumber, ammount, "Transfer", "current");
                     //Lodge.Operation(accountNumber, ammount, "Transfer", "savings");
                 }
-                System(accountNumber);
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System(accountNumber);
             }
             if (userOption == 5)
             {
+                Vanilla.top();
                 Console.WriteLine("What is the ammount you want to Transfer from your Savings Account into your Current Account?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
                 if (ammount > Savings.getSavings(accountNumber))
@@ -75,12 +90,14 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                     //Withdraw.Operation(accountNumber, ammount, "Transfer", "savings");
                     //Lodge.Operation(accountNumber, ammount, "Transfer", "current");
                 }
-                System(accountNumber);
-
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System(accountNumber);
             }
 
             if (userOption == 0)
             {
+                Console.Clear();
                 MainClass.Main();
             }
         }
@@ -195,6 +212,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
         }
         public static void accessCustomer(String firstName, String lastName, String accountNumber, String PIN)
         {
+            Vanilla.top();
             char[] delimit = { '\t', '\n' };
             string[] customersArray = File.ReadAllText("customers.txt").Split(delimit);
 

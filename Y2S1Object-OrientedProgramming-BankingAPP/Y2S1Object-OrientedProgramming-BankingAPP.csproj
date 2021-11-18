@@ -38,6 +38,7 @@
     <Compile Include="models\Savings.cs" />
     <Compile Include="models\Current.cs" />
     <Compile Include="models\Operations.cs" />
+    <Compile Include="models\Vanilla.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
