@@ -44,12 +44,12 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 "\nThe new " + accountUpperCase + " Account Balance is " + newBalanceSavingsAccount);
         }
 
-        public static void statement(String accountNumber, String accountSource)
+        public static void statement(String accountNumber, String targetAccount)
         {
             //This file will print the bank statement based on the accountNumber and accountSource(savings or current)
-            Console.WriteLine(char.ToUpper(accountSource[0]) + (accountSource.Substring(1)) + " Statement");
+            Console.WriteLine(char.ToUpper(targetAccount[0]) + (targetAccount.Substring(1)) + " Statement");
             Console.WriteLine("Date\t\tDesc\t\tAmount\tBalance");
-            using (StreamReader sr = new StreamReader(accountNumber + "-" + accountSource + ".txt"))
+            using (StreamReader sr = new StreamReader(accountNumber + "-" + targetAccount + ".txt"))
             {
                 string line;
                 // Read and print each line from the file until the end of the file is reached. 
