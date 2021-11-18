@@ -37,12 +37,11 @@ If the balance is above 0 the systems will shows the balance with a error, trhow
 
 - Lodge Current Account;
 
-The employee will be able to lodge a current account, the program will ask for the account number and ammount to lodge in.
-The program will add the entry to the current.txt account numbers file and update the balance on this file.
+The employee will be able to lodge a specific current account, the program will ask for the account number and ammount to lodge, the program will log this moviment to the current.txt file that belongs to this customer, following the log format ( Date + Operation + Ammount + Balance)
 
 - Withdraw Current Account;
 
-The employee will be able to withdraw for a current account, the program will ask for the account number and ammount to withdraw, if the ammount is above the balance of this account an error will appear showing the balance of this customer current account.
+The employee will be able to withdraw for a current account, the program will ask for the account number and ammount to withdraw, if the ammount is above the balance of this account, an error will appear showing the balance of this customer current account have not suficient balance to complete the operation.
 
 - List Customers Data;
 
@@ -50,25 +49,37 @@ The employee will be able to list all the customer with their data( Full name an
 
 - List Customers Balance;
 
-The employee also will be able to see all the accounts and their balances for savings and current account.
+The employee also will be able to see all the account numbers and their balances for savings and current account.
+
+- List Statemetnts Balance;
+
+The employee will be able to print an account statement of a specific account, the program will ask for the account number and print the current and savings statements( With all the detais: DATA Operation Ammount Balance)
+
 
 ## Login as User
-To login as a user the user will have to input the first name, last name, account number and PIN, if all the data was imputed as the customers.txt file has stored the User System Menu will appear, otherwise the program will show the customer menu again to imput the correct data, as the user logged into the system, the following features is avaiable:
+To login as a user, the user will have to input his first name, last name, account number and PIN, if all the data matches with the customers.txt, the User System Menu will appear, otherwise the program will show the customer menu again to imput the correct data.
+
+As the user logged into the system, the following features will be avaiable:
 
 - Retrieve the Transactions History;
+
 This option will show statements of the current and savings account.
 
 - Lodge;
-The user will be able to lodge into his account, the program will add the data to the current.txt files of his account number
+
+The user will be able to lodge into his current account, the program will add the data to the current.txt files of his account number.
 
 - Withdraw;
-The user will be able to withdraw, the program will check if the current account have suficient balance to withdraw, otherwise will show an error message with the user account current balance.
+
+The user will be able to withdraw, the program will check if the current account have suficient balance to withdraw(To not be negative), otherwise will show an error message with the user current account balance.
 
 - Transfer from Current to Savings;
-The user will be able to transfer the balance from the Current to Savings, the program will check the suficiente balance and add entries for both current.txt and savings.txt files with the ammount removed and add to the second file.
+
+The user will be able to transfer an ammount of his balance from the Current to Savings, the program will check the suficiente balance and add logs for both current.txt and savings.txt files, first one will show a negative value and update the balance and the second one will show a transfer as positive value and update balance as well.
 
 - Transfer from Savings to Current;
-The user will be able to transfer the balance from the Savings to Current, the program will check the suficient balance and add entries for both savings.txt and current.txt files with the ammount removes and add to the second file.
+
+The user will be able to transfer an ammount of his balance from the Savings to Current, the program will check the suficient balance on his savings account and add logs for both savings.txt and current.txt files.
 
 ###H3 header
 ####H4 header
