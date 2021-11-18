@@ -5,25 +5,25 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
 {
     public class Operations
     {
-        public static void Operation(String accountNumber, double ammount, String operation, String sourceAccount)
+        public static void Operation(String accountNumber, double ammount, String operation, String targetAccount)
         {
             //this code will update an account and log the transactions as below:
-            //accountNumber, ammount(Positive to add, negative to remove), operation(NAME on the Statement/Log), sourceAccount(current or savings)
-            //To add 100 to savings pass 100 to ammount and savings on sourceAccount
-            //To remove 100 from current pass -100 to amount and current on sourceAccount
+            //accountNumber, ammount(Positive to add, negative to remove), operation(NAME on the Statement/Log), targetAccount(current or savings)
+            //To add 100 to savings pass 100 to ammount and savings on targetAccount
+            //To remove 100 from current pass -100 to amount and current on targetAccount
             String today = DateTime.Now.ToString("dd/MM/yyyy");
-            string[] accountArray = File.ReadAllText(accountNumber + "-" + sourceAccount + ".txt").Split('\t');
+            string[] accountArray = File.ReadAllText(accountNumber + "-" + targetAccount + ".txt").Split('\t');
             double balanceAccount = Double.Parse(accountArray[accountArray.Length - 1]);
             double newBalanceSavingsAccount;
 
             newBalanceSavingsAccount = balanceAccount + ammount;
             //Get the firt letter of the account Uper Case
-            string accountUpperCase = char.ToUpper(sourceAccount[0]) + (sourceAccount.Substring(1));
+            string accountUpperCase = char.ToUpper(targetAccount[0]) + (targetAccount.Substring(1));
 
             Console.WriteLine("The Balance of " + accountUpperCase + " Account is " + balanceAccount);
             //read savings and create a new savings temp;
-            using (var sreader = new StreamReader(accountNumber + "-" + sourceAccount + ".txt"))
-            using (var swriter = new StreamWriter(accountNumber + "-" + sourceAccount + "-temp.txt"))
+            using (var sreader = new StreamReader(accountNumber + "-" + targetAccount + ".txt"))
+            using (var swriter = new StreamWriter(accountNumber + "-" + targetAccount + "-temp.txt"))
             //copy lines from savings to savings-temp
             {
                 string lines;
@@ -33,13 +33,13 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 }
             }
             //Add the new line with Lodge
-            using (StreamWriter sw = File.AppendText(accountNumber + "-" + sourceAccount + "-temp.txt"))
+            using (StreamWriter sw = File.AppendText(accountNumber + "-" + targetAccount + "-temp.txt"))
             {
                 sw.WriteLine(today + "\t" + operation + "\t" + ammount + "\t" + newBalanceSavingsAccount);
             }
             //Delete the old file and rename removing temp from the file
-            File.Delete(accountNumber + "-" + sourceAccount + ".txt");
-            File.Move(accountNumber + "-" + sourceAccount + "-temp.txt", accountNumber + "-" + sourceAccount + ".txt");
+            File.Delete(accountNumber + "-" + targetAccount + ".txt");
+            File.Move(accountNumber + "-" + targetAccount + "-temp.txt", accountNumber + "-" + targetAccount + ".txt");
             Console.WriteLine("The ammount " + ammount + " was " + operation + " from the " + accountUpperCase + " Account with success!" +
                 "\nThe new " + accountUpperCase + " Account Balance is " + newBalanceSavingsAccount);
         }
