@@ -10,7 +10,8 @@ It is a Banking System Program on C# and the Features are:
 
 [TOC]
 
-# How The System Works: Welcome Screen
+# How The System Works
+# Welcome Screen
 At the first screen the user needs to infome if he's a employee of the bank or a customer.
 ## Login as Employee
 As employee the user will be asked to input a password(A1234), after the successul password the System's will shows the options for the employee:
