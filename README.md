@@ -27,7 +27,6 @@ Also, the program will add the customers data into the customers.txt file and, t
 Both text files will log each moviment of the account on the format:
 
         Date	Operation	Ammount	        Balance
-        
         23-01-2017	Starting	0		0
         24-01-2017	Lodgement	100		100
         24-02-2017	Withdraw	-50		50
