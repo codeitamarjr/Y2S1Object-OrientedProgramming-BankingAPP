@@ -14,8 +14,9 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 "\n(3)Withdraw" +
                 "\n(4)Transfer from Current to Savings" +
                 "\n(5)Transfer from Savings to Current" +
+                "\n(6)Transfer to another Customer" +
                 "\n(0)Exit and go back to the Main Menu" +
-                "   Type your option:");
+                "\n   Type your option:");
 
             int userOption = Convert.ToInt32(Console.ReadLine());
             if (userOption == 1)
@@ -24,15 +25,15 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 Operations.statement(accountNumber, "current");
                 Operations.statement(accountNumber, "savings");
                 Console.WriteLine("Press 0 to go back to the menu");
-                int option = Convert.ToInt32(Console.ReadLine());
-                if ( option == 0) System(accountNumber);
+                int optionm = Convert.ToInt32(Console.ReadLine());
+                if ( optionm == 0) System(accountNumber);
             }
             if (userOption == 2)
             {
                 Vanilla.top();
                 Console.WriteLine("What is the ammount you want to lodge?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
-                Operations.Operation(accountNumber, ammount, "Lodgement", "current");
+                Operations.Moviment(accountNumber, ammount, "Lodgement", "current");
                 Console.WriteLine("Press 0 to go back to the menu");
                 int option = Convert.ToInt32(Console.ReadLine());
                 if (option == 0) System(accountNumber);
@@ -47,7 +48,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                     Console.WriteLine("Insuficient Account Balance");
                 } else
                 {
-                    Operations.Operation(accountNumber, -ammount, "Withdraw", "current");
+                    Operations.Moviment(accountNumber, -ammount, "Withdraw", "current");
                 }
                 Console.WriteLine("Press 0 to go back to the menu");
                 int option = Convert.ToInt32(Console.ReadLine());
@@ -64,8 +65,8 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 }
                 else
                 {
-                    Operations.Operation(accountNumber, -ammount, "Transfer", "current");
-                    Operations.Operation(accountNumber, ammount, "Transfer", "savings");
+                    Operations.Moviment(accountNumber, -ammount, "Transfer", "current");
+                    Operations.Moviment(accountNumber, ammount, "Transfer", "savings");
 
                     //Withdraw.Operation(accountNumber, ammount, "Transfer", "current");
                     //Lodge.Operation(accountNumber, ammount, "Transfer", "savings");
@@ -85,8 +86,8 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 }
                 else
                 {
-                    Operations.Operation(accountNumber, -ammount, "Transfer", "savings");
-                    Operations.Operation(accountNumber, ammount, "Transfer", "current");
+                    Operations.Moviment(accountNumber, -ammount, "Transfer", "savings");
+                    Operations.Moviment(accountNumber, ammount, "Transfer", "current");
                     //Withdraw.Operation(accountNumber, ammount, "Transfer", "savings");
                     //Lodge.Operation(accountNumber, ammount, "Transfer", "current");
                 }
@@ -94,7 +95,43 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 int option = Convert.ToInt32(Console.ReadLine());
                 if (option == 0) System(accountNumber);
             }
+            if (userOption == 6)
+            {
+                Vanilla.top();
+                Console.WriteLine("==================\nWelcome to the Transfer Panel");
+                Console.WriteLine("What is the ammount you want transfer from your account " + accountNumber + "?");
+                double ammount = Convert.ToDouble(Console.ReadLine());
+                if (ammount > Current.getCurrent(accountNumber))
+                {
+                    Console.WriteLine("Insuficient Account Balance");
+                    Console.WriteLine("Press 0 to go back to the menu");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    if (option == 0) System(accountNumber);
+                }
+                else
+                {
+                    Console.WriteLine("What is the account number you want to transfer to?");
+                    String accountNumberTarget = Console.ReadLine();
+                    Console.WriteLine("You are transfering " + ammount + " from " + accountNumber + " to " + accountNumberTarget + "\n" +
+                        "Do you want to proceed?\n" +
+                        "(1)Yes\n" +
+                        "(2)No");
+                    int option = Convert.ToInt16(Console.ReadLine());
+                    if (option == 1)
+                    {
+                        Operations.Moviment(accountNumber, -ammount, "To " + accountNumberTarget, "current");
+                        Operations.Moviment(accountNumberTarget, ammount, "From " + accountNumber, "current");
+                        Console.WriteLine("Press 0 to go back to the menu");
+                        option = Convert.ToInt32(Console.ReadLine());
+                        if (option == 0) System(accountNumber);
+                    }
+                    if (option == 2) System(accountNumber);
 
+                    Console.WriteLine("Press 0 to go back to the menu");
+                    option = Convert.ToInt32(Console.ReadLine());
+                    if (option == 0) System(accountNumber);
+                }
+            }
             if (userOption == 0)
             {
                 Console.Clear();
@@ -111,6 +148,33 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
 
         public static void updateCustomer(string newAccountNumber, String firstName, String lastName, String email)
         {
+            //Check if the customer is already on the system before create it again
+            //Mount the array with all the customers
+            char[] delimit = { '\t', '\n' };
+            string[] customersArray = File.ReadAllText("customers.txt").Split(delimit);
+            for (int i = 0; i < customersArray.Length; i++)
+            {
+                if (customersArray[i].Contains(firstName))
+                {
+                    if (customersArray[i + 1].Contains(lastName))
+                    {
+                        if (customersArray[i - 1].Contains(newAccountNumber))
+                        {
+                            if (customersArray[i + 2].Contains(email))
+                            {
+                                Console.WriteLine("This Customer is already on the system!");
+                                Console.WriteLine("Press 0 to go back to the menu");
+                                int option = Convert.ToInt32(Console.ReadLine());
+                                if (option == 0) Employee.System();
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+
             //read customer and create a new customers temp
             using (var sreader = new StreamReader("customers.txt"))
             using (var swriter = new StreamWriter("customers-temp.txt"))

@@ -7,36 +7,51 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
     {
         public static void System()
         {
+            Vanilla.top();
             Console.WriteLine("==================\nAs a bank employee you can:" +
                 "\n(1)Create Customers" +
                 "\n(2)Delete customers" +
                 "\n(3)Lodge Current Account" +
                 "\n(4)Withdraw Current Account" +
-                "\n(5)List Customers Personal DATA" +
-                "\n(6)List Customers Balances" +
-                "\n(7)Account Statements" +
+                "\n(5)Transfers" +
+                "\n(6)List Customers Personal DATA" +
+                "\n(7)List Customers Balances" +
+                "\n(8)Account Statements" +
                 "\n(0)Go back to the Main Menu");
             int userOption = Convert.ToInt32(Console.ReadLine());
             if (userOption == 1)
             {
+                Vanilla.top();
                 Create();
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System();
+
             }
             if (userOption == 2)
             {
+                Vanilla.top();
                 Delete();
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System();
             }
             if (userOption == 3)
             {
+                Vanilla.top();
                 Console.WriteLine("==================\nWelcome to the Lodge Panel");
                 Console.WriteLine("What is the account number you want to lodge?");
                 String accountNumber = Console.ReadLine();
                 Console.WriteLine("What is the ammount you want to lodge?");
                 double ammount = Convert.ToDouble(Console.ReadLine());
-                Operations.Operation(accountNumber,ammount,"Lodgement","current");
-                System();
+                Operations.Moviment(accountNumber,ammount,"Lodgement","current");
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System();
             }
             if (userOption == 4)
             {
+                Vanilla.top();
                 Console.WriteLine("==================\nWelcome to the Withdraw Panel");
                 Console.WriteLine("What is the account number you want to withdraw?");
                 String accountNumber = Console.ReadLine();
@@ -47,24 +62,68 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                     Console.WriteLine("Insuficiente Account Balance");
                 } else
                 {
-                    Operations.Operation(accountNumber, -ammount, "Withdraw", "current");
+                    Operations.Moviment(accountNumber, -ammount, "Withdraw", "current");
                 }
-                System();
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System();
             }
             if (userOption == 5)
             {
+                Vanilla.top();
+                Console.WriteLine("==================\nWelcome to the Transfer Panel");
+                Console.WriteLine("What is the account number you want to transfer from?");
+                String accountNumber = Console.ReadLine();
+                Console.WriteLine("What is the ammount you want transfer from the account "+accountNumber+"?");
+                double ammount = Convert.ToDouble(Console.ReadLine());
+                if (ammount > Current.getCurrent(accountNumber)) {
+                    Console.WriteLine("Insuficiente Account Balance");
+                    Console.WriteLine("Press 0 to go back to the menu");
+                    int option = Convert.ToInt32(Console.ReadLine());
+                    if (option == 0) System();
+                }
+                else
+                {
+                    Console.WriteLine("What is the account number you want to transfer to?");
+                    String accountNumberTarget = Console.ReadLine();
+                    Console.WriteLine("You are transfering " + ammount + " from " + accountNumber + " to " + accountNumberTarget + "\n" +
+                        "Do you want to proceed?\n" +
+                        "(1)Yes\n" +
+                        "(2)No");
+                    int option = Convert.ToInt16(Console.ReadLine());
+                    if (option == 1)
+                    {
+                        Operations.Moviment(accountNumber, -ammount, "To " + accountNumberTarget, "current");
+                        Operations.Moviment(accountNumberTarget, ammount, "From " + accountNumber, "current");
+                        Console.WriteLine("Press 0 to go back to the menu");
+                        option = Convert.ToInt32(Console.ReadLine());
+                        if (option == 0) System();
+                    }
+                    if (option == 2) System();
+
+                }
+            }
+            if (userOption == 6)
+            {
+                Vanilla.top();
                 Console.WriteLine("==================\nWelcome to the Customers List Data");
                 Customer.listCustomers();
-                System();
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System();
             }
-            if (userOption == 6)
+            if (userOption == 7)
             {
+                Vanilla.top();
                 Console.WriteLine("==================\nWelcome to the Customers List Balance");
                 Customer.listCustomersBalances();
-                System();
+                Console.WriteLine("Press 0 to go back to the menu");
+                int option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System();
             }
-            if (userOption == 6)
+            if (userOption == 8)
             {
+                Vanilla.top();
                 Console.WriteLine("==================\nWelcome to the Bank Statements");
                 Console.WriteLine("What is the account number you want to see?");
                 String accountNumber = Console.ReadLine();
@@ -74,7 +133,9 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 int option = Convert.ToInt32(Console.ReadLine());
                 if (option == 1) Operations.statement(accountNumber, "current");
                 if (option == 2) Operations.statement(accountNumber, "savings");
-                System();
+                Console.WriteLine("Press 0 to go back to the menu");
+                option = Convert.ToInt32(Console.ReadLine());
+                if (option == 0) System();
             }
 
             if (userOption == 0)
@@ -113,7 +174,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 Customer.updateCustomer(accountNumber, firstName, lastName, email);
                 Savings.createSavings(accountNumber);
                 Current.createCurrent(accountNumber);
-                System();
             }
             else
             {
@@ -121,7 +181,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
                 Savings.createSavings(accountNumber);
                 Current.createCurrent(accountNumber);
                 Customer.createCustomer(accountNumber, firstName, lastName, email);
-                System();
             }
         }
 
@@ -131,7 +190,6 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             Console.WriteLine("What is the account code that you wish to delete?");
             String accountNumber = Console.ReadLine();
             Customer.deleteCustomer(accountNumber);
-            System();
         }
     }
 }

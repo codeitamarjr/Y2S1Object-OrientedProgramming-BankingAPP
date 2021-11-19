@@ -5,12 +5,12 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
 {
     public class Operations
     {
-        public static void Operation(String accountNumber, double ammount, String operation, String targetAccount)
+        public static void Moviment(String accountNumber, double ammount, String operation, String targetAccount)
         {
             //this code will update an account and log the transactions as below:
-            //accountNumber, ammount(Positive to add, negative to remove), operation(NAME on the Statement/Log), targetAccount(current or savings)
-            //To add 100 to savings pass 100 to ammount and savings on targetAccount
-            //To remove 100 from current pass -100 to amount and current on targetAccount
+            //accountNumber, ammount(Positive to add, negative to remove), operation(NAME to appear on the Statement/Log), targetAccount(current or savings that needs to be updated)
+            //To add 100 to the savings for ex: pass 100 to ammount and savings on targetAccount
+            //To remove 100 from current for ex: pass -100 to amount and current on targetAccount
             String today = DateTime.Now.ToString("dd/MM/yyyy");
             string[] accountArray = File.ReadAllText(accountNumber + "-" + targetAccount + ".txt").Split('\t');
             double balanceAccount = Double.Parse(accountArray[accountArray.Length - 1]);
