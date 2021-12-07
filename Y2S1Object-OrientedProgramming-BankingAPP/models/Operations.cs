@@ -14,9 +14,8 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             String today = DateTime.Now.ToString("dd/MM/yyyy");
             string[] accountArray = File.ReadAllText(accountNumber + "-" + targetAccount + ".txt").Split('\t');
             double balanceAccount = Double.Parse(accountArray[accountArray.Length - 1]);
-            double newBalanceSavingsAccount;
+            double newBalanceTargetAccount = balanceAccount + ammount;
 
-            newBalanceSavingsAccount = balanceAccount + ammount;
             //Get the firt letter of the account Uper Case
             string accountUpperCase = char.ToUpper(targetAccount[0]) + (targetAccount.Substring(1));
 
@@ -24,7 +23,7 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             //read savings and create a new savings temp;
             using (var sreader = new StreamReader(accountNumber + "-" + targetAccount + ".txt"))
             using (var swriter = new StreamWriter(accountNumber + "-" + targetAccount + "-temp.txt"))
-            //copy lines from savings to savings-temp
+            //copy lines from target to target-temp
             {
                 string lines;
                 while ((lines = sreader.ReadLine()) != null)
@@ -35,13 +34,13 @@ namespace Y2S1ObjectOrientedProgrammingBankingAPP.models
             //Add the new line with Lodge
             using (StreamWriter sw = File.AppendText(accountNumber + "-" + targetAccount + "-temp.txt"))
             {
-                sw.WriteLine(today + "\t" + operation + "\t" + ammount + "\t" + newBalanceSavingsAccount);
+                sw.WriteLine(today + "\t" + operation + "\t" + ammount + "\t" + newBalanceTargetAccount);
             }
             //Delete the old file and rename removing temp from the file
             File.Delete(accountNumber + "-" + targetAccount + ".txt");
             File.Move(accountNumber + "-" + targetAccount + "-temp.txt", accountNumber + "-" + targetAccount + ".txt");
             Console.WriteLine("The ammount " + ammount + " was " + operation + " from the " + accountUpperCase + " Account with success!" +
-                "\nThe new " + accountUpperCase + " Account Balance is " + newBalanceSavingsAccount);
+                "\nThe new " + accountUpperCase + " Account Balance is " + newBalanceTargetAccount);
         }
 
         public static void statement(String accountNumber, String targetAccount)
